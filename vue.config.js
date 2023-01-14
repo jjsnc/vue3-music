@@ -1,3 +1,4 @@
+const registerRouter = require('./backend/router')
 
 module.exports = {
   css: {
@@ -11,4 +12,10 @@ module.exports = {
       }
     }
   },
+  devServer: {
+    before(app) {
+      registerRouter(app)
+    }
+  },
+ 
 }
