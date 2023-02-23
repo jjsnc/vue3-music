@@ -8,6 +8,8 @@ const Search = () => import("@/views/search" /* webpackChunkName: "search" */);
 const Album = () => import("@/views/album" /* webpackChunkName: "album" */);
 const SingerDetail = () =>
   import("@/views/singer-detail" /* webpackChunkName: "singer-detail" */);
+const TopDetail = () =>
+  import("@/views/top-detail" /* webpackChunkName: "top-detail" */);
 
 const routes = [
   {
@@ -15,14 +17,14 @@ const routes = [
     redirect: "/recommend",
   },
   {
-    path: '/recommend',
+    path: "/recommend",
     component: Recommend,
     children: [
       {
-        path: ':id',
-        component: Album
-      }
-    ]
+        path: ":id",
+        component: Album,
+      },
+    ],
   },
   {
     path: "/singer",
@@ -35,8 +37,14 @@ const routes = [
     ],
   },
   {
-    path: "/top-list",
+    path: '/top-list',
     component: TopList,
+    children: [
+      {
+        path: ':id',
+        component: TopDetail
+      }
+    ]
   },
   {
     path: "/search",

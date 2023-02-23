@@ -24,12 +24,19 @@
         </li>
       </ul>
     </scroll>
+    <router-view v-slot="{ Component }">
+      <transition appear name="slide">
+        <component :is="Component" :data="selectedTop" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
 <script>
 import Scroll from "@/components/wrap-scroll";
 import { getTopList } from "@/service/top-list";
+import { TOP_KEY } from "@/assets/js/constant";
+import storage from "good-storage";
 
 export default {
   name: "top-list",
@@ -51,6 +58,13 @@ export default {
   methods: {
     selectItem(top) {
       this.selectedTop = top;
+      this.cacheTop(top);
+      this.$router.push({
+        path: `/top-list/${top.id}`,
+      });
+    },
+    cacheTop(top) {
+      storage.session.set(TOP_KEY, top);
     },
   },
 };
