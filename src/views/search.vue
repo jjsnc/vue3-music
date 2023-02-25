@@ -84,7 +84,7 @@ export default {
 
     const router = useRouter();
     getHotKeys().then((result) => {
-      hotKeys.value = result.hotkey || [];
+      hotKeys.value = result?.hotkey || [];
     });
     watch(query, async (newQuery) => {
       if (!newQuery) {
